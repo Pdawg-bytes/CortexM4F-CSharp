@@ -47,6 +47,6 @@ namespace CortexM4_CSharp
         internal const byte SIMD_VADD = 0x17;
         internal const byte SIMD_VSUB = 0x18;
         internal const byte SIMD_VMUL = 0x19;
-        internal const byte SIMD_VMOV = 0x20;
+        internal const byte SIMD_VMOV = 0x1A;
     }
 }
