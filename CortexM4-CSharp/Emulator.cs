@@ -19,31 +19,13 @@ namespace CortexM4_CSharp
 
         public void InitMemory()
         {
-            memoryObj.memory[0] = MOV;      // Opcode for MOV immediate instruction (MOV R1, <immediate>)
-            memoryObj.memory[1] = 0x01;     // Destination register (R1)
-            memoryObj.memory[2] = 0x0A;     // Immediate value (LSB) for 463,126
-            memoryObj.memory[3] = 0xE5;     // Immediate value - 2nd byte
-            memoryObj.memory[4] = 0x07;     // Immediate value - 3rd byte
-            memoryObj.memory[5] = 0x00;     // Immediate value (MSB) - 4th byte
-
-            memoryObj.memory[6] = MOV;      // Opcode for MOV immediate instruction (MOV R2, <immediate>)
-            memoryObj.memory[7] = 0x02;     // Destination register (R2)
-            memoryObj.memory[8] = 0xC0;     // Immediate value (LSB) for 124,512
-            memoryObj.memory[9] = 0x01;     // Immediate value - 2nd byte
-            memoryObj.memory[10] = 0x02;    // Immediate value - 3rd byte
-            memoryObj.memory[11] = 0x00;    // Immediate value (MSB) - 4th byte
-
-            memoryObj.memory[12] = ADD;     // Opcode for ADD instruction (ADD R0, R1, R2)
-            memoryObj.memory[13] = 0x20;    // Destination register (R0)
-            memoryObj.memory[14] = 0x01;    // Operand register (R1)
-            memoryObj.memory[15] = 0x02;    // Operand register (R
         }
 
         public void Run()
         {
             InitMemory();
             
-            while (registers.PC <= 63)
+            while (registers.PC <= 62)
             {
                 uint instruction = FetchInstruction();
                 DecodeAndExecute(registers, instruction);
@@ -54,7 +36,7 @@ namespace CortexM4_CSharp
         private uint FetchInstruction()
         {
             uint instruction = registers.PC;
-            registers.PC += 1;
+            registers.PC += 4;
             return instruction;
         }
 
