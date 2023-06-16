@@ -11,14 +11,14 @@ namespace CortexM4_CSharp
             memory = new byte[64]; // 64B memory
         }
 
-        public byte[] ReadWord(uint address)
+        public byte[] ReadBlock(uint address)
         {
             byte[] word = new byte[4];
             Buffer.BlockCopy(memory, (int)address, word, 0, 4);
             return word;
         }
 
-        public void WriteWord(uint address, uint value)
+        public void WriteBlock(uint address, uint value)
         {
             byte[] word = BitConverter.GetBytes(value);
             Buffer.BlockCopy(word, 0, memory, (int)address, 4);

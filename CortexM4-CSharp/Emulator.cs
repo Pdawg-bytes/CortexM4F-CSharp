@@ -19,15 +19,6 @@ namespace CortexM4_CSharp
 
         public void InitMemory()
         {
-            memoryObj.memory[0] = memoryObj.Reg32ToReg8(277)[0];
-            memoryObj.memory[1] = memoryObj.Reg32ToReg8(277)[1];
-            memoryObj.memory[2] = memoryObj.Reg32ToReg8(277)[2];
-            memoryObj.memory[3] = memoryObj.Reg32ToReg8(277)[3];
-
-            memoryObj.memory[4] = MOV;
-            memoryObj.memory[5] = 0;
-            memoryObj.memory[6] = (byte)memoryObj.Reg8ToReg32(memoryObj.ReadWord(0));
-            memoryObj.memory[7] = 0;
         }
 
         public void Run()
@@ -54,12 +45,12 @@ namespace CortexM4_CSharp
 
         private void DecodeAndExecute(RegisterSet registers, uint instruction)
         {
-            byte[] buffer = memoryObj.ReadWord(instruction); // Execution Block
+            byte[] buffer = memoryObj.ReadBlock(instruction); // Execution Block
 
             uint opcode = buffer[0]; // Instruction OpCode
-            int rd = buffer[1];     // Destination Register
-            int rn = buffer[2];     // Source register #1
-            int rm = buffer[3];     // Source register #2
+            int rd = buffer[1];      // Destination Register
+            int rn = buffer[2];      // Source register #1
+            int rm = buffer[3];      // Source register #2
 
             switch (opcode)
             {
