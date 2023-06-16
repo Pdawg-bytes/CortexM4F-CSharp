@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using static CortexM4_CSharp.OpCodes;
 
 namespace CortexM4_CSharp
 {
@@ -12,7 +8,7 @@ namespace CortexM4_CSharp
 
         public Memory()
         {
-            memory = new byte[512]; // 512B memory
+            memory = new byte[64]; // 64B memory
         }
 
         public byte[] ReadWord(uint address)
