@@ -19,14 +19,23 @@ namespace CortexM4_CSharp
 
         public void InitMemory()
         {
-            
+            memoryObj.memory[0] = memoryObj.Reg32ToReg8(277)[0];
+            memoryObj.memory[1] = memoryObj.Reg32ToReg8(277)[1];
+            memoryObj.memory[2] = memoryObj.Reg32ToReg8(277)[2];
+            memoryObj.memory[3] = memoryObj.Reg32ToReg8(277)[3];
+
+            memoryObj.memory[4] = MOV;
+            memoryObj.memory[5] = 0;
+            memoryObj.memory[6] = (byte)memoryObj.Reg8ToReg32(memoryObj.ReadWord(0));
+            memoryObj.memory[7] = 0;
         }
 
         public void Run()
         {
             InitMemory();
             byte[] bytes = memoryObj.Reg32ToReg8(int.MaxValue);
-            Debug.WriteLine(BitConverter.ToString(bytes));
+            Debug.WriteLine("[*] 32to8 (Little Endian): " + BitConverter.ToString(bytes));
+            Debug.WriteLine("[*] 8to32: " + memoryObj.Reg8ToReg32(bytes));
             
             while (registers.PC <= 60)
             {
@@ -48,26 +57,26 @@ namespace CortexM4_CSharp
             byte[] buffer = memoryObj.ReadWord(instruction); // Execution Block
 
             uint opcode = buffer[0]; // Instruction OpCode
-            uint rd = buffer[1];     // Destination Register
-            uint rn = buffer[2];     // Source register #1
-            uint rm = buffer[3];     // Source register #2
+            int rd = buffer[1];     // Destination Register
+            int rn = buffer[2];     // Source register #1
+            int rm = buffer[3];     // Source register #2
 
             switch (opcode)
             {
                 case ADD:
                     Add(registers, rd, registers.R[rn], registers.R[rm]);
-                    Debug.WriteLine("[!] ADD | " + "(Param 1: " + registers.R[rn] + ", Register " + rn + "), " + "(Param 2: " + registers.R[rm] + ", Register " + rm + ")" + " | Dest. Register Val: " + registers.R[rd]);
+                    Debug.WriteLine("[+] ADD | " + "(Param 1: " + registers.R[rn] + ", Register " + rn + "), " + "(Param 2: " + registers.R[rm] + ", Register " + rm + ")" + " | Dest. Register Val: " + registers.R[rd]);
                     break;
                 case SUB:
                     Subtract(registers, rd, registers.R[rn], registers.R[rm]);
-                    Debug.WriteLine("[!] SUB | " + "(Param 1: " + registers.R[rn] + ", Register " + rn + "), " + "(Param 2: " + registers.R[rm] + ", Register " + rm + ")" + " | Dest. Register Val: " + registers.R[rd]);
+                    Debug.WriteLine("[+] SUB | " + "(Param 1: " + registers.R[rn] + ", Register " + rn + "), " + "(Param 2: " + registers.R[rm] + ", Register " + rm + ")" + " | Dest. Register Val: " + registers.R[rd]);
                     break;
                 case MOV:
                     Move(registers, rd, rn);
-                    Debug.WriteLine("[!] MOV | " + "To register: " + rd + ", From value: " + rn + " | Dest. Register Val: " + registers.R[rd]);
+                    Debug.WriteLine("[+] MOV | " + "To register: " + rd + ", From value: " + rn + " | Dest. Register Val: " + registers.R[rd]);
                     break;
                 default:
-                    Debug.WriteLine("[*] Unknown opcode: " + opcode);
+                    Debug.WriteLine("[!] Unknown opcode: " + opcode);
                     break;
             }
         }

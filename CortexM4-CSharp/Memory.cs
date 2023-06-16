@@ -25,17 +25,6 @@ namespace CortexM4_CSharp
         }
 
         // Helper functions
-        public ushort OpcodeReg8ToReg16(byte[] block)
-        {
-            return (ushort)((block[1] << 8) | (block[0] & 0xFF));
-        }
-
-        public void OpcodeSetReg16Value(byte[] block, ushort reg16)
-        {
-            block[1] = (byte)(reg16 >> 8);
-            block[0] = (byte)(reg16 & 0xFF);
-        }
-
         public byte[] Reg32ToReg8(int regValue)
         {
             byte[] bytes = new byte[4];
@@ -44,6 +33,17 @@ namespace CortexM4_CSharp
             bytes[2] = (byte)((regValue >> 16) & 0xFF);
             bytes[3] = (byte)((regValue >> 24) & 0xFF);
             return bytes;
+        }
+        public int Reg8ToReg32(byte[] reg8)
+        {
+            int reg32 = 0;
+
+            reg32 |= reg8[0];
+            reg32 |= (reg8[1] << 8);
+            reg32 |= (reg8[2] << 16);
+            reg32 |= (reg8[3] << 24);
+
+            return reg32;
         }
     }
 }

@@ -10,17 +10,17 @@ namespace CortexM4_CSharp
 {
     internal class Instructions
     {
-        public static void Add(RegisterSet registers, uint dest, uint r1, uint r2)
+        public static void Add(RegisterSet registers, int dest, int r1, int r2)
         {
             registers.R[dest] = r1 + r2;
         }
 
-        public static void Subtract(RegisterSet registers, uint dest, uint r1, uint r2)
+        public static void Subtract(RegisterSet registers, int dest, int r1, int r2)
         {
             registers.R[dest] = r1 - r2;
         }
 
-        public static void Move(RegisterSet registers, uint rd, uint immediate)
+        public static void Move(RegisterSet registers, int rd, int immediate)
         {
             registers.R[rd] = immediate;
         }

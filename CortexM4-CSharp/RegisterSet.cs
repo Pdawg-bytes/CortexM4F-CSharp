@@ -9,7 +9,7 @@ namespace CortexM4_CSharp
     internal class RegisterSet
     {
         // Define the registers
-        public uint[] R { get; private set; } // General-purpose registers (R0-R15)
+        public int[] R { get; private set; } // General-purpose registers (R0-R15)
         public uint PC { get; set; } // Program Counter
         public uint SP { get; set; } // Stack Pointer
         public uint N { get; set; } // Negative flag
@@ -20,7 +20,7 @@ namespace CortexM4_CSharp
         public RegisterSet()
         {
             // Initialize the registers
-            R = new uint[16];
+            R = new int[16];
             PC = 0;
             SP = 0;
             N = 0;
