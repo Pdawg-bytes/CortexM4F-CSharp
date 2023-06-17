@@ -36,7 +36,7 @@ namespace CortexM4_CSharp.New
         /// </summary>
         public CPU() 
         {
-            mmu = new MMU(new byte[4096], new byte[4096]);
+            mmu = new MMU(new byte[256], new byte[256]);
 
             Reset();
 

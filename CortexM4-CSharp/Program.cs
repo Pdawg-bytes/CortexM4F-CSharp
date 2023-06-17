@@ -23,7 +23,7 @@ namespace CortexM4_CSharp
             cpu.mmu.Write16(codeInitAddress + 4, 0x1840);
 
             cpu.Reset();
-            cpu.Run(2000);
+            cpu.Run(256);
         }
     }
 }
