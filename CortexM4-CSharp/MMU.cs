@@ -17,6 +17,11 @@ namespace CortexM4_CSharp.New
         private const uint sramBegin = 0; // Replace with the actual SRAM start address
         private const uint sramEnd = 0;   // Replace with the actual SRAM end address
 
+        /// <summary>
+        /// The CPU's Memory Management Unit
+        /// </summary>
+        /// <param name="codeRegion">Array of space for code</param>
+        /// <param name="sramRegion">Array of space for SRAM storage</param>
         public MMU(byte[] codeRegion, byte[] sramRegion)
         {
             this.codeRegion = codeRegion;

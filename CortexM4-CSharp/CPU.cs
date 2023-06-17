@@ -30,6 +30,9 @@ namespace CortexM4_CSharp.New
             HANDLER_MODE
         };
 
+        /// <summary>
+        /// Provides the entry point to the emulated ARMV7 CPU.
+        /// </summary>
         public CPU() 
         {
             mmu = new MMU(new byte[256], new byte[256]);
@@ -78,7 +81,7 @@ namespace CortexM4_CSharp.New
 
         public void VerboseRun(uint n_instr)
         {
-            Console.WriteLine("The starting PC: 0x" + registers.PC.ToString("X"));
+            Console.WriteLine("Starting PC: 0x" + registers.PC.ToString("X"));
             Prefetch();
 
             while(n_instr > 0)
@@ -105,14 +108,15 @@ namespace CortexM4_CSharp.New
 
             for (int i = 0; i < 15; ++i)
             {
-                Console.WriteLine("The register " + i + " has value: " + registers.R[i]);
+                Console.WriteLine("Register " + i + " contains value: " + registers.R[i]);
             }
 
             Console.WriteLine();
-            Console.WriteLine("T: " + registers.T);
-            Console.WriteLine("C: " + registers.C);
-            Console.WriteLine("N: " + registers.N);
-            Console.WriteLine("V: " + registers.V);
+            Console.WriteLine("Thumb state: " + registers.T);
+            Console.WriteLine("Carry flag: " + registers.C);
+            Console.WriteLine("Negative flag: " + registers.N);
+            Console.WriteLine("Overflow flag: " + registers.V);
+            Console.WriteLine("Zero flag: " + registers.Z);
         }
         #endregion
 
@@ -194,6 +198,11 @@ namespace CortexM4_CSharp.New
         }
         #endregion
 
+        /// <summary>
+        /// Executes the ARM ASM instruction
+        /// </summary>
+        /// <param name="instruction">The CPU instruction.</param>
+        /// <exception cref="Exception">Throws when an unrecognized Opcode is sent to the CPU.</exception>
         void ExecuteOp(ushort instruction)
         {
             if (instruction == 0b0100011011000000)
