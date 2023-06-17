@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using static CortexM4_CSharp.New.Utils;
 
 namespace CortexM4_CSharp.New
@@ -35,7 +36,7 @@ namespace CortexM4_CSharp.New
         /// </summary>
         public CPU() 
         {
-            mmu = new MMU(new byte[256], new byte[256]);
+            mmu = new MMU(new byte[4096], new byte[4096]);
 
             Reset();
 
@@ -63,7 +64,7 @@ namespace CortexM4_CSharp.New
         {
             Prefetch();
 
-            while(n_instr > 0)
+            while (n_instr > 0)
             {
                 ushort instr = registers.PrefetchVal[0];
                 registers.PrefetchVal[0] = registers.PrefetchVal[1];
@@ -76,6 +77,7 @@ namespace CortexM4_CSharp.New
 
                 n_instr--;
             }
+
             Print();
         }
 
@@ -116,7 +118,8 @@ namespace CortexM4_CSharp.New
             Console.WriteLine("Carry flag: " + registers.C);
             Console.WriteLine("Negative flag: " + registers.N);
             Console.WriteLine("Overflow flag: " + registers.V);
-            Console.WriteLine("Zero flag: " + registers.Z);
+            Console.WriteLine("Zero flag: " + registers.Z + "\n");
+            Console.WriteLine("Final Program Counter (R15): " + registers.R[15]);
         }
         #endregion
 
@@ -125,7 +128,7 @@ namespace CortexM4_CSharp.New
         {
             CPUMode mode = CPUMode.THREAD_MODE;
 
-            // Set the PSR
+            // Set thumb register
             registers.T = true;
 
             // Initialize the program counter
@@ -328,47 +331,47 @@ namespace CortexM4_CSharp.New
 
         public void SoftwareInterrupt(ushort instruction)
         {
-            throw new InvalidOperationException("Software interrupt is not implemented");
+            throw new InvalidOperationException("[!] Software interrupt is not implemented");
         }
 
         public void DataMemSyncBarier(uint instruction)
         {
-            throw new InvalidOperationException("Data Memory Barrier and Data Synchronization Barrier not implemented yet!");
+            throw new InvalidOperationException("[!] Data Memory Barrier and Data Synchronization Barrier not implemented yet!");
         }
 
         public void CpsiDE(ushort instruction)
         {
-            throw new InvalidOperationException("CPSIE and CPSID are not implemented yet!");
+            throw new InvalidOperationException("[!] CPSIE and CPSID are not implemented yet!");
         }
 
         public void SupervisorCall(ushort instruction)
         {
-            throw new InvalidOperationException("The supervisor call instruction is not implemented yet!");
+            throw new InvalidOperationException("[!] The supervisor call instruction is not implemented yet!");
         }
 
         public void Breakpoint(ushort instruction)
         {
-            throw new InvalidOperationException("The breakpoint instruction is not implemented yet!");
+            throw new InvalidOperationException("[!] The breakpoint instruction is not implemented yet!");
         }
 
         public void WaitForInterruptEvent(ushort instruction)
         {
-            throw new InvalidOperationException("Wait For Event and Wait For Interrupt are not implemented yet!");
+            throw new InvalidOperationException("[!] Wait For Event and Wait For Interrupt are not implemented yet!");
         }
 
         public void SendEvent(ushort instruction)
         {
-            throw new InvalidOperationException("Send Event is not implemented yet!");
+            throw new InvalidOperationException("[!] Send Event is not implemented yet!");
         }
 
         public void InstructionSyncBarier(uint instruction)
         {
-            throw new InvalidOperationException("Instruction Synchronization Barrier is not implemented yet");
+            throw new InvalidOperationException("[!] Instruction Synchronization Barrier is not implemented yet");
         }
 
         public void SignZeroExtendByteHalfword(uint instruction)
         {
-            throw new InvalidOperationException("Sign extend or zero extend is not implemented yet");
+            throw new InvalidOperationException("[!] Sign extend or zero extend is not implemented yet");
         }
 
         public void MoveShiftedRegister(ushort instruction)
