@@ -114,11 +114,11 @@ namespace CortexM4_CSharp.New
             }
 
             Console.WriteLine();
-            Console.WriteLine("Thumb state: " + registers.T);
-            Console.WriteLine("Carry flag: " + registers.C);
-            Console.WriteLine("Negative flag: " + registers.N);
-            Console.WriteLine("Overflow flag: " + registers.V);
-            Console.WriteLine("Zero flag: " + registers.Z + "\n");
+            Console.WriteLine("Thumb state (T): " + registers.T);
+            Console.WriteLine("Carry flag (C): " + registers.C);
+            Console.WriteLine("Negative flag (N): " + registers.N);
+            Console.WriteLine("Overflow flag (V): " + registers.V);
+            Console.WriteLine("Zero flag (Z): " + registers.Z + "\n");
             Console.WriteLine("Final Program Counter (R15): " + registers.R[15]);
         }
         #endregion
@@ -494,7 +494,7 @@ namespace CortexM4_CSharp.New
                     break;
 
                 default:
-                    throw new InvalidOperationException("The operation in the ALI is unsupported! | MOV COMP ADD SUB IMME, " + instruction);
+                    throw new InvalidOperationException("The operation in the ALU is unsupported! | MOV COMP ADD SUB IMME, " + instruction);
             }
         }
 
@@ -707,7 +707,7 @@ namespace CortexM4_CSharp.New
                         break;
                     }
                 default:
-                    throw new InvalidOperationException("The operation in the ALI is unsupported! | ALU OP, " + instruction);
+                    throw new InvalidOperationException("The operation in the ALU is unsupported! | ALU OP, " + instruction);
             }
         }
 
@@ -886,7 +886,7 @@ namespace CortexM4_CSharp.New
                         break;
                     }
                 default:
-                    throw new InvalidOperationException("The operation in the ALI is unsupported! | HI REG OP BE, " + instruction);
+                    throw new InvalidOperationException("The operation in the ALU is unsupported! | HI REG OP BE, " + instruction);
             }
         }
 
@@ -931,7 +931,7 @@ namespace CortexM4_CSharp.New
                         break;
                     }
                 default:
-                    throw new InvalidOperationException("The operation in the ALI is unsupported! | LDR STR REG OFFSET, " + instruction);
+                    throw new InvalidOperationException("The operation in the ALU is unsupported! | LDR STR REG OFFSET, " + instruction);
             }
         }
 
@@ -970,7 +970,7 @@ namespace CortexM4_CSharp.New
                         break;
                     }
                 default:
-                    throw new InvalidOperationException("The operation in the ALI is unsupported! | LDR STR SIGN EXT BYTE HALF, " + instruction);
+                    throw new InvalidOperationException("The operation in the ALU is unsupported! | LDR STR SIGN EXT BYTE HALF, " + instruction);
             }
         }
 
@@ -1001,7 +1001,7 @@ namespace CortexM4_CSharp.New
                     registers.R[instruction & 7] = mmu.Read8(address);
                     break;
                 default:
-                    throw new InvalidOperationException("The operation in the ALI is unsupported! | LDR STR IMME OFFSET, " + instruction);
+                    throw new InvalidOperationException("The operation in the ALU is unsupported! | LDR STR IMME OFFSET, " + instruction);
             }
         }
 
